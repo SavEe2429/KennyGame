@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Jump), typeof(ChangLane), typeof(CharacterController))]
 public class MoveForward : MonoBehaviour
 {
     CharacterController Controller;
@@ -26,6 +27,6 @@ public class MoveForward : MonoBehaviour
         {
             Anim.SetBool("IsRun?", false);
         }
-        
+
     }
 }
