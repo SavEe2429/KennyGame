@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Jump), typeof(MoveForward), typeof(CharacterController))]
 public class ChangLane : MonoBehaviour
 {
     CharacterController Controller;
@@ -18,17 +19,17 @@ public class ChangLane : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log($"input : {Input.GetAxis("Horizontal")}");
-        Debug.Log($"m_currentLane : {m_currentLane}");
+        // Debug.Log($"input : {Input.GetAxis("Horizontal")}");
+        // Debug.Log($"m_currentLane : {m_currentLane}");
         if (Input.GetKeyDown(KeyCode.D) && m_currentLane < 1)
         {
             m_currentLane++;
-            Debug.Log($"++");
+            // Debug.Log($"++");
         }
         if (Input.GetKeyDown(KeyCode.A) && m_currentLane > -1)
         {
             m_currentLane--;
-            Debug.Log($"--");
+            // Debug.Log($"--");
         }
 
 
@@ -43,4 +44,5 @@ public class ChangLane : MonoBehaviour
         Controller.Move(moveDir);
 
     }
+
 }
