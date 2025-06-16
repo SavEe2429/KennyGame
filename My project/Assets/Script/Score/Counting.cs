@@ -7,6 +7,7 @@ public class Counting : MonoBehaviour
     [SerializeField] Axis axis = Axis.Z;
      [SerializeField] int decimalScore = 3;
     [SerializeField] TextMeshProUGUI scoreLabel;
+    [SerializeField] TextMeshProUGUI scoreLabelEnd;
     float startSpot;
     float destination;
 
@@ -22,6 +23,7 @@ public class Counting : MonoBehaviour
 
         string format = $"F{decimalScore}";
         scoreLabel.text = $"Score : {score.ToString(format)}";
+        scoreLabelEnd.text = $"Score : {score.ToString(format)}";
         // Debug.Log($"Score : {score.ToString(format)}");
     }
 

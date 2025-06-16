@@ -18,12 +18,16 @@ public class Jump : MonoBehaviour
     [Header("LayerMask")]
     [Tooltip("layer ที่ต้องการให้แตะกัน")]
     [SerializeField] LayerMask groundMask;
+     [SerializeField] LayerMask holeMask;
 
     CharacterController controller;
     bool isGround;
+    bool isHole;
     Vector3 MoveY;
     Animator Anim;
 
+    public GameObject gameOver;
+    public bool isPause;
 
     void Start()
     {
@@ -33,8 +37,10 @@ public class Jump : MonoBehaviour
 
     void Update()
     {
-        
+
         isGround = Physics.CheckSphere(groundCheck.position, rayDistance, groundMask);
+        isHole = Physics.CheckSphere(groundCheck.position, rayDistance, holeMask);
+
 
         if (isGround && MoveY.y < 0) // อยู่ที่พื้น
         {
@@ -52,13 +58,22 @@ public class Jump : MonoBehaviour
             MoveY.y = Mathf.Sqrt(-2f * gravity * jumpForce);
             jumpCount++;
             Anim.SetTrigger("IsJump?");
-            
+
         }
 
         MoveY.y += gravity * Time.deltaTime; // เพิ่มแรงโน้มถ่วง
 
         controller.Move(MoveY * Time.deltaTime); //ใช้งาน
 
+        if(isHole)
+        {
+            Destroy(this.gameObject);
+            isPause = gameOver.activeSelf;
+            Debug.Log($"isPause before : {isPause}");
+            gameOver.SetActive(!isPause);
+
+            Time.timeScale = isPause ? 1f : 0f;
+        }
     }
 
     void OnDrawGizmosSelected()
